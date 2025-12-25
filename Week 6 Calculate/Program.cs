@@ -47,19 +47,19 @@ Exit - выход из приложения
     }
     public static void Calculate(List<string> input)
     {
-        double op1 = double.Parse(input[0]);
-        double op2 = double.Parse(input[2]);
         string action = input[1];
 
-        switch (action)
+        var dictionary = new Dictionary<string, Func<double, double, double>>()
         {
-            case "+": Console.WriteLine(Sum(op1, op2)); break;
-            case "-": Console.WriteLine(Subtract(op1, op2)); break;
-            case "*": Console.WriteLine(Multiply(op1, op2)); break;
-            case "/": Console.WriteLine(Divide(op1, op2)); break;
-            case "%": Console.WriteLine(Mod(op1, op2)); break;
-            case "^": Console.WriteLine(Pow(op1, op2)); break;
-        }
+            {"+", Sum},
+            {"-", Subtract},
+            {"*", Multiply},
+            {"/", Divide},
+            {"%", Mod},
+            {"^", Pow},
+        };
+
+        Console.WriteLine(dictionary[input[1]](double.Parse(input[0]), double.Parse(input[2])));
     }
     public static List<string> InputHandler(string input)
     {
