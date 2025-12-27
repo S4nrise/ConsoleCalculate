@@ -8,23 +8,29 @@ namespace MyNewLogger
 {
     public class CompositeLogger : ILogger
     {
-        private readonly ConsoleLogger _consoleLogger;
-        private readonly FileLogger _FileLogger;
-        public CompositeLogger(ConsoleLogger consoleLogger, FileLogger fileLogger)
+        //private readonly ConsoleLogger _consoleLogger;
+        //private readonly FileLogger _FileLogger;
+        private readonly IList<ILogger> _loggers = new List<ILogger>();
+        //public CompositeLogger(ConsoleLogger consoleLogger, FileLogger fileLogger)
+        public CompositeLogger(IList<ILogger> loggers)
         {
-            _consoleLogger = consoleLogger;
-            _FileLogger = fileLogger;
+            _loggers = loggers;
         }
         public void LogError(Exception exception, string? additionalMessage = null)
         {
-            _consoleLogger.LogError(exception, additionalMessage);
-            _FileLogger.LogError(exception, additionalMessage);
+            foreach (var logger in _loggers)
+            {
+                logger.LogError(exception, additionalMessage);
+                
+            }
         }
 
         public void LogInformation(string message)
         {
-            _consoleLogger.LogInformation(message);
-            _FileLogger.LogInformation(message);
+            foreach (var logger in _loggers)
+            {
+                logger.LogInformation(message);
+            }
         }
     }
 }

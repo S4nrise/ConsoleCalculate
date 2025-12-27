@@ -41,7 +41,7 @@ namespace Week_6_Calculate
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Ошибочка в сумме? Возможно очень большие числа");
-                return 0.0;
+                return double.NaN;
             }
         }
         public double Subtract(double x, double y)
@@ -55,7 +55,7 @@ namespace Week_6_Calculate
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Ошибочка в вычитании? Возможно очень большие числа");
-                return 0.0;
+                return double.NaN;
             }
         }
         public double Multiply(double x, double y)
@@ -69,7 +69,7 @@ namespace Week_6_Calculate
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Ошибочка в умножении? Возможно очень большие числа");
-                return 0.0;
+                return double.NaN;
             }
         }
         public double Divide(double x, double y)
@@ -80,7 +80,7 @@ namespace Week_6_Calculate
                 {
                     var exception = new DivideByZeroException();
                     _logger.LogError(exception, "Ошибочка в делении? Возможно деление на 0?");
-                    return 0.0;
+                    return double.NaN;
                 }
                 string opMessage = $"Divide: {x} / {y} = {x / y}";
                 _logger.LogInformation(opMessage);
@@ -89,7 +89,7 @@ namespace Week_6_Calculate
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Ошибочка в делении?");
-                return 0.0;
+                return double.NaN;
             }
         }
         public double Mod(double x, double y)
@@ -103,7 +103,7 @@ namespace Week_6_Calculate
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Ошибочка в остаточном делении?");
-                return 0.0;
+                return double.NaN;
             }
         }
         public double Pow(double x, double y)
@@ -118,7 +118,7 @@ namespace Week_6_Calculate
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Ошибочка в возведении в степень?");
-                return 0.0;
+                return double.NaN;
             }
         }
     }
